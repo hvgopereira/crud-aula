@@ -16,7 +16,7 @@ Olá, pessoal! Este é o meu primeiro CRUD, que inicialmente nasceu de um projet
 https://github.com/user-attachments/assets/d79ee5ab-1947-4b78-919d-7f5aa7702942
  
 
-<img title="Logo Hugo Pereira" src="https://github.com/hvgopereira/netflix-remake/assets/162385532/1063be5e-a9fa-4aba-a6e5-ff5a99957761" min-width="150px" max-width="150px" width="150px" align="right" alt="Logo Hugo Pereira"></img>
+<img title="Logo Hugo Pereira" src="https://github.com/hvgopereira/netflix-remake/assets/162385532/1063be5e-a9fa-4aba-a6e5-ff5a99957761" min-width="60px" max-width="60px" width="60px" align="right" alt="Logo Hugo Pereira"></img>
 
 
 ##
