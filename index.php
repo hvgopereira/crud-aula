@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
-// Pesquisa segura
 $searchTerm = sanitize($_GET['search'] ?? '');
 $sql = "SELECT * FROM users WHERE nome LIKE '%$searchTerm%'";
 $result = $conn->query($sql);
@@ -44,41 +43,56 @@ $result = $conn->query($sql);
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD Simples</title>
+    <title>CRUD</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=person_edit_manage_accounts_delete_search_add" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=person_edit_manage_accounts_delete_search_add_supervisor_account_person_hourglass_bottom_male_build" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Cadastro de Usuários</h1>
-
+      <a href="https://github.com/hvgopereira">
+         <img class="logo-hp" style="width: 80px;" src="logohp-web.png" title="Hugo Pereira" alt="Hugo Pereira">
+      </a>
+      <h1 class="title-crud">Cadastro de Usuários  <span class="material-symbols-outlined icon-title">
+      supervisor_account
+      </span></h1>
+ 
     <div class="form-wrapper">
         <form class="formulario" method="POST" id="userForm">
             <input type="hidden" name="id" id="userId">
             <input type="text" name="nome" placeholder="Nome" required>
-            <input type="number" name="idade" placeholder="Idade" required>
+            <input class="age-input" type="number" name="idade" placeholder="Idade" required>
             <select name="genero" required>
                 <option value="">Gênero</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Feminino">Feminino</option>
                 <option value="Outro">Outro</option>
             </select>
-            <button class="btn-add" type="submit" name="action" value="add">Adicionar <span class="material-symbols-outlined">add</span></button>
+            <button class="btn-add" type="submit" name="action" value="add"> <span title="Adicionar" class="material-symbols-outlined">add</span></button>
         </form>
         
         <form method="GET">
             <input type="text" name="search" placeholder="Pesquisar por nome" value="<?php echo htmlspecialchars($searchTerm); ?>">
-            <button class="btn-search" type="submit">Pesquisar <span class="material-symbols-outlined">search</span></button>
+            <button title="Pesquisar" class="btn-search" type="submit"> <span class="material-symbols-outlined">search</span></button>
         </form>
     </div>
 
     <div class="table-wrapper">
         <table>
             <tr>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Gênero</th>
-                <th>Ações</th>
+               <div class="testea">
+                  <th>Nome<span class="material-symbols-outlined name-table">
+                  person
+                  </span> </th>
+               </div>
+                <th>Idade <span class="material-symbols-outlined age-table">
+               hourglass_bottom
+               </span></th>
+                <th>Gênero <span class="material-symbols-outlined gender-table">
+               male
+               </span></th>
+                <th class="btns-form">Ações <span class="material-symbols-outlined action-table">
+            build
+            </span></th>
             </tr>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
@@ -87,12 +101,12 @@ $result = $conn->query($sql);
                     <td><?php echo htmlspecialchars($row['genero']); ?></td>
                     <td class="btns-form">
                         <button class="edit" onclick="editUser(<?php echo $row['id']; ?>, '<?php echo htmlspecialchars($row['nome']); ?>', <?php echo $row['idade']; ?>, '<?php echo $row['genero']; ?>')">
-                           Editar <span class="material-symbols-outlined">person_edit</span>
+                           Editar <span class="material-symbols-outlined edit-icon">person_edit</span>
                         </button>
                         
                         <form method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');" action="index.php">
                             <input type="hidden" name="delete" value="<?php echo $row['id']; ?>">
-                            <button type="submit" class="btn-delete"><span class="material-symbols-outlined">delete</span></button>
+                            <button type="submit" class="btn-delete"><span class="material-symbols-outlined delete-icon">delete</span></button>
                         </form>
                     </td>
                 </tr>
@@ -107,7 +121,7 @@ $result = $conn->query($sql);
             <form class="form-edit" method="POST">
                 <input type="hidden" name="id" id="editUserId">
                 <input type="text" name="nome" id="editNome" placeholder="Nome" required>
-                <input type="number" name="idade" id="editIdade" placeholder="Idade" required>
+                <input class="age-input" type="number" name="idade" id="editIdade" placeholder="Idade" required>
                 <select name="genero" id="editGenero" required>
                     <option value="Masculino">Masculino</option>
                     <option value="Feminino">Feminino</option>
